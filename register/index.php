@@ -1,17 +1,22 @@
+<?php
+	if(isset($_GET["name"])){
+		error_log("Register submitted: " . print_r($_GET, true));
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../style.css">
   <meta charset="UTF-8">
   <title>Register</title>
-  <link rel="icon" href="icons/logo.png" type="image/gif" sizes="16x16">
+  <link rel="icon" href="../icons/logo.png" type="image/gif" sizes="16x16">
 </head>
 <body>
 <div class="container">
 
   <header>
     <div style="background-color: var(--color-accent-primary); display:flex">
-      <a href="index.html" class="icon logo"></a>
+      <a href="../index.php" class="icon logo"></a>
     </div>
 
     <span class="title">Roary</span>
@@ -56,7 +61,7 @@
           <br>
           <input type="submit" value="CREATE ACCOUNT">
           <p class="decor-font">()()(())()((((())()((()()()(()(())((()())(())))()()(</p>
-          <span>Already have an account?</span> <a href="login.html">Log in here</a>
+          <span>Already have an account?</span> <a href="../login">Log in here</a>
         </form>
       </div>
     </div>
@@ -71,7 +76,7 @@
     <p class="decor-font">()(())(( ()(()))) ()(())((</p>
   </footer>
 </div>
-<script src="src/script_registration.js"></script>
-<script src="src/utils.js"></script>
+<script src="../src/script_registration.js"></script>
+<script src="../src/utils.js"></script>
 </body>
 </html>
