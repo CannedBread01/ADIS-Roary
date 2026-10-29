@@ -1,17 +1,22 @@
+<?php
+	if(isset($_GET["name"])){
+		error_log("Login submitted: " . print_r($_GET, true));
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="icon" href="icons/logo.png" type="image/gif" sizes="16x16">
+    <link rel="icon" href="../icons/logo.png" type="image/gif" sizes="16x16">
 </head>
 <body>
 <div class="container">
 
     <header>
         <div style="background-color: var(--color-accent-primary); display:flex">
-            <a href="index.html" class="icon logo"></a>
+            <a href="../index.php" class="icon logo"></a>
         </div>
 
         <span class="title">Roary</span>
@@ -38,7 +43,7 @@
             <div class="flex-container"> <!-- form container -->
                 <span class="vertical status-bar-normal" id="status_bar">//:READY</span>
 
-                <form id="form_login" action="/login/login.php">
+                <form id="form_login" action="/login">
                     <div class="border-panel flex-container input-wrapper username-input">
                         <label for="name">[USR]</label>
                         <input type="text" name="name" id="name" required autocomplete="username">
@@ -51,7 +56,7 @@
                     <br>
                     <input type="submit" value="LOG IN">
                     <p class="decor-font">()()(())()((((())()((()()()(()(())((()())(())))()()(</p>
-                    <span>Don't have an account?</span> <a href="register.html">Create one here</a>
+                    <span>Don't have an account?</span> <a href="../register">Create one here</a>
                 </form>
             </div>
         </div>
@@ -66,8 +71,8 @@
         <p class="decor-font">()(())(( ()(()))) ()(())((</p>
     </footer>
 </div>
-<script src="src/utils.js"></script>
-<script src="src/script_login.js"></script>
+<script src="../src/utils.js"></script>
+<script src="../src/script_login.js"></script>
 
 </body>
 </html>

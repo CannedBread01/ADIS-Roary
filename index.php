@@ -12,7 +12,7 @@
     <div class="container">
         <header>
             <div style="background-color: var(--color-accent-primary); display:flex">
-                <a href="index.html" class="icon logo"></a>
+                <a href="index.php" class="icon logo"></a>
             </div>
 
             <span class="title">Roary</span>
@@ -66,13 +66,13 @@
                 </form>
 
                 <div class="panel login-registration-form" id="login_registration_form">
-                    <a class="btn" href="login.html">LOG IN</a>
+                    <a class="btn" href="/login">LOG IN</a>
                     <div class="flex-container" style="gap: 0.5rem">
                         <p class="decor-font">())())())(()</p>
                         <p>OR</p>
                         <p class="decor-font">())())())(()</p>
                     </div>
-                    <a class="btn" href="register.html">REGISTER</a>
+                    <a class="btn" href="/register">REGISTER</a>
                     <button onclick="logUserIn(true)"> //DEV-OVERRIDE-LOGIN</button>
                 </div>
             </div>

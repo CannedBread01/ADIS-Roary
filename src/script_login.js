@@ -34,4 +34,5 @@ function validateForm(){
 
 form.addEventListener('submit', (e) => {
     if (!validateForm()) e.preventDefault();
+
 });
