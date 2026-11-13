@@ -80,6 +80,17 @@
                     <br>
                     <input type="submit" value="ROAR">
                 </form>
+
+                <div class="panel login-registration-form" id="login_registration_form">
+                    <a class="btn" href="/login">LOG IN</a>
+                    <div class="flex-container" style="gap: 0.5rem">
+                        <p class="decor-font">())())())(()</p>
+                        <p>OR</p>
+                        <p class="decor-font">())())())(()</p>
+                    </div>
+                    <a class="btn" href="/register">REGISTER</a>
+                    <button onclick="logUserIn(true)"> //DEV-OVERRIDE-LOGIN</button>
+                </div>
             </div>
 		<?php endif; ?>
         </div>
