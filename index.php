@@ -30,9 +30,9 @@
 		</div>
 		<?php else: ?>
 		<div style="margin-left:auto; display:flex; align-items: flex-end;">
-			<span><?= htmlspecialchars($_SESSION['username']) ?></span>
-			<form action="/logout/logout.php" method="post">
-				<input type="submit" name="logout" value="LOGOUT" class="icon logout" />
+			<span style="padding: 0.25rem 1rem; background-color:var(--color-text); color:var(--color-background)"><?= htmlspecialchars($_SESSION['username']) ?></span>
+			<form action="/logout/logout.php" method="post" class="empty-form" style="display: flex;">
+				<input type="submit" name="logout" class="icon logout" value=""></input>
 			</form>
 		</div>
 		<?php endif; ?>

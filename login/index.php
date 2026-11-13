@@ -1,4 +1,5 @@
 <?php
+session_start();
 	if(isset($_GET["name"])){
 		error_log("Login submitted: " . print_r($_GET, true));
 	}

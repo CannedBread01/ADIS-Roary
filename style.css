@@ -321,7 +321,7 @@ button:hover{
 
 .logout{
     background: var(--color-accent-primary);
-    height: 1rem;
+    height: 2rem;
     mask: url("icons/logout.png") no-repeat center / contain;
 }
 .moon:hover, .sun:hover{
@@ -347,4 +347,8 @@ a:hover{
 }
 .no-display{
     display: none;
+}
+.empty-form{
+	padding: 0;
+	height: 100%;
 }
