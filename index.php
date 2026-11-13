@@ -24,12 +24,12 @@
                 <p class="dot-font">BROADCAST YOUR ROAR</p>
             </div>
 		<?php if(!isset($_SESSION['username'])): ?>
-		<div stlye="display: flex; align-items:end; margin-left: auto; gap: 1rem;">
+		<div style="margin-left:auto; display:flex; align-items:flex-end; gap: 1rem;">
 			<a class="btn" href="/login">LOG IN</a>
 			<a class="btn" href="/register">REGISTER</a>
 		</div>
 		<?php else: ?>
-		<div>
+		<div style="margin-left:auto; display:flex; align-items: flex-end;">
 			<span><?= htmlspecialchars($_SESSION['username']) ?></span>
 			<form action="/logout/logout.php" method="post">
 				<input type="submit" name="logout" value="LOGOUT" class="icon logout" />
@@ -80,17 +80,6 @@
                     <br>
                     <input type="submit" value="ROAR">
                 </form>
-
-                <div class="panel login-registration-form" id="login_registration_form">
-                    <a class="btn" href="/login">LOG IN</a>
-                    <div class="flex-container" style="gap: 0.5rem">
-                        <p class="decor-font">())())())(()</p>
-                        <p>OR</p>
-                        <p class="decor-font">())())())(()</p>
-                    </div>
-                    <a class="btn" href="/register">REGISTER</a>
-                    <button onclick="logUserIn(true)"> //DEV-OVERRIDE-LOGIN</button>
-                </div>
             </div>
 		<?php endif; ?>
         </div>
