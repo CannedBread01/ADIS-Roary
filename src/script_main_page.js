@@ -1,7 +1,6 @@
 
 const roar_container = document.getElementById("roar_container")
 const message_form = document.getElementById("message_form")
-const register_login_form = document.getElementById("login_registration_form")
 const message_input = document.getElementById("message")
 const statusBar = document.getElementById("status_bar")
 const decor_set = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,;:#'!/?()+*-_<>="
@@ -10,6 +9,8 @@ roars = []
 let currentUsername = "";
 
 function setStatusBar(isValid, message){
+    if(statusBar == null) return;
+
     statusBar.classList.toggle("status-bar-normal", isValid);
     statusBar.classList.toggle("status-bar-error", !isValid);
     statusBar.textContent = message;
@@ -96,7 +97,7 @@ function submitMessage(){
     return false;
 }
 
-message_form.addEventListener("input", handleOnChangedMessage);
+if(message_form != null) message_form.addEventListener("input", handleOnChangedMessage);
 
 // handling dummy data for testing
 dummy_roars = [
@@ -120,18 +121,6 @@ dummy_roars = [
 roars = roars.concat(dummy_roars)
 updateDisplayedMessages()
 
-
-// -- handle if user is logged in -- //
-let user_logged_in = false;
-
-function logUserIn(isLoggedIn){
-    user_logged_in = isLoggedIn;
-    message_form.classList.toggle("no-display", !isLoggedIn);
-    register_login_form.classList.toggle("no-display", isLoggedIn);
-
-    setStatusBar(isLoggedIn, isLoggedIn ? "::BROADCAST-READY::" : "::NO-USR-ACCOUNT::");
-}
-logUserIn(user_logged_in);
 
 
 

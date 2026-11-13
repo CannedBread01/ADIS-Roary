@@ -124,7 +124,7 @@ footer{
     gap: 1rem;
     flex: 1;
     min-height: 0;
-    margin: 0 0 2rem 0;
+    margin: 0 0 0 0;
     overflow-y: auto;
 }
 .message-container > *:first-child {
@@ -133,7 +133,7 @@ footer{
 
 .form-container{
     flex: 0 0 auto;
-    margin-top: auto;
+    margin-top: 1rem;
 }
 .username{
     font-family: var(--font-mono);
@@ -274,6 +274,13 @@ button:hover{
 .btn:hover{
     text-decoration: underline;
     color: var(--color-background);
+}
+.btn-small, .btn-small:visited, .btn-small:link{
+    font-family: var(--font-pixel);
+    background: var(--color-accent-primary);
+    color: var(--color-background);
+    border: none;
+    padding: 0.25rem 0.5rem;
 }
 
 .login-button{
