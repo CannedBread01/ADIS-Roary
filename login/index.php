@@ -15,23 +15,7 @@ session_start();
 <body>
 <div class="container">
 
-    <header>
-        <div style="background-color: var(--color-accent-primary); display:flex">
-            <a href="../index.php" class="icon logo"></a>
-        </div>
-
-        <span class="title">Roary</span>
-        <div>
-            <p class="decor-font">102102121</p>
-            <p class="dot-font">BROADCAST YOUR ROAR</p>
-        </div>
-        <div class="plus br"></div>
-        <div class="plus bl"></div>
-
-        <div style="display:flex; margin-left: auto;">
-            <span class="moon icon" id="theme_switch" onclick="switchTheme()"></span>
-        </div>
-    </header>
+    <?php require '../components/header.php'; ?>
 
     <div class="main-content">
         <div class="centered">
@@ -64,13 +48,7 @@ session_start();
 
     </div>
 
-    <footer>
-        <div class="plus tr"></div>
-        <div class="plus tl"></div>
-        <p class="decor-font">()(())(( ()(()))) ()(())((</p>
-        <p class="dot-font">::ADIS++2026-27++WISE++PROJECT::</p>
-        <p class="decor-font">()(())(( ()(()))) ()(())((</p>
-    </footer>
+    <?php require '../components/footer.php'; ?>
 </div>
 <script src="../src/utils.js"></script>
 <script src="../src/script_login.js"></script>
