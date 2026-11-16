@@ -61,7 +61,7 @@ form.addEventListener('submit', async (e) => {
             return;
         }
 
-        setFormStatusBar(false, data.error || '://LOGIN-FAILED');
+        setFormStatusBar(false, data.error || '://REGISTRATION-FAILED');
     } catch (err) {
         console.log(err);
         setFormStatusBar(false, '://NETWORK-ERROR');

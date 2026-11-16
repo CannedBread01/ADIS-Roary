@@ -32,7 +32,29 @@ function validateForm(){
     element.addEventListener('input', validateForm);
 });
 
-form.addEventListener('submit', (e) => {
-    if (!validateForm()) e.preventDefault();
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!validateForm()) return; // client side validation of form
+
+    // submit request to server
+    try {
+        const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            credentials: 'same-origin'
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+            window.location.href = data.redirect;
+            return;
+        }
+
+        setFormStatusBar(false, data.error || '://LOGIN-FAILED');
+    } catch (err) {
+        console.log(err);
+        setFormStatusBar(false, '://NETWORK-ERROR');
+    }
 
 });
