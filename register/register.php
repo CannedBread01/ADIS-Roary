@@ -6,13 +6,13 @@ function isRegistrationFormValid($username, $pwd_original, $pwd_copy, $pdo){
 	if(!isset($username, $pwd_original, $pwd_copy)) return "Not all fields are filled";
 	
 	//check if username is only alphanumeric
-	if (!ctype_alnum($username)) return "Username can only have alphanumerical symbols";
+	if (!ctype_alnum($username)) return "://USR-ONLY-ALPHANUMERIC";
 	
 	//check if passwords are the same
-	if($pwd_original != $pwd_copy) return "passwords don't match";
+	if($pwd_original != $pwd_copy) return "://PWD-NOT-MATCH";
 	
 	//check if password is at least 12 characters long
-	if(strlen($pwd_original) < 12) return "password is too short";
+	if(strlen($pwd_original) < 12) return "://PWD-TOO-SHORT";
 	
 	//check if usename already exists 
 	$stmt = $pdo->prepare("SELECT EXISTS (
@@ -23,7 +23,7 @@ function isRegistrationFormValid($username, $pwd_original, $pwd_copy, $pdo){
 	$stmt->execute([':username' => $username]); 
 	$doesUserExist = $stmt->fetchColumn();
 	
-	if($doesUserExist) return "Username already taken";
+	if($doesUserExist) return "://USR-NAME-TAKEN";
 	return "";
 }
 
@@ -37,7 +37,8 @@ function isRegistrationFormValid($username, $pwd_original, $pwd_copy, $pdo){
 	$error = isRegistrationFormValid($username, $pwd_original, $pwd_copy, $pdo);
 	if ($error != '') {
 		error_log($error);
-	    header('Location: index.php?error=' . urlencode($error));
+		http_response_code(401);
+	    echo json_encode(['success' => false, 'error' => $error]);
 	    exit;
 	}
 	$stmt = $pdo->prepare("INSERT INTO userProfiles (username, password)
@@ -48,5 +49,5 @@ function isRegistrationFormValid($username, $pwd_original, $pwd_copy, $pdo){
 		]);
 	error_log("made it to the end");
 	$_SESSION['username'] = $username;
-	header('Location: ../index.php');
+	echo json_encode(['success' => true, 'redirect' => '../index.php']);
 ?>
