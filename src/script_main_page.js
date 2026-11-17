@@ -5,9 +5,6 @@ const message_input = document.getElementById("message")
 const statusBar = document.getElementById("status_bar")
 const decor_set = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,;:#'!/?()+*-_<>="
 
-roars = []
-let currentUsername = "";
-
 function setStatusBar(isValid, message){
     if(statusBar == null) return;
 
@@ -24,104 +21,58 @@ function createRandomDecorString(length){
     return decorString;
 }
 
-function createPostCard(item){
-    const card = document.createElement("div");
-    card.classList.add("flex-container");
-    card.classList.add("panel");
-
-    const content = document.createElement("div");
-
-    const decorStripe = document.createElement("div");
-    decorStripe.classList.add("vertical");
-    decorStripe.classList.add("message-decor");
-    decorStripe.innerHTML = item.decor_string
-
-
-    const nameParagraph = document.createElement("p");
-    nameParagraph.classList.add("username");
-    let name = item.name;
-    if (item.name === currentUsername) name += " (You)"
-    nameParagraph.innerText = name;
-
-    const messageParagraph = document.createElement("p");
-    messageParagraph.innerText = item.message;
-
-    content.appendChild(nameParagraph);
-    content.appendChild(messageParagraph);
-
-    card.appendChild(content);
-    card.appendChild(decorStripe);
-    return card;
-}
-
-function updateDisplayedMessages(){
-    roar_container.innerHTML = "";
-    roars.forEach(roar => {
-        roar_container.appendChild(createPostCard(roar));
-    })
+function decorateMessages(){
+    document.querySelectorAll("#roar_container .message-decor").forEach(decorStripe => {
+        decorStripe.textContent = createRandomDecorString(4);
+    });
     roar_container.scrollTop = roar_container.scrollHeight;
 }
 
-function isMessageValid(data){
-    return data.name.trim() !== "" && data.message.trim() !== "";
+function isMessageValid(){
+    return message_input.value.trim() !== "";
 }
 
 function handleOnChangedMessage(){
-    const data = Object.fromEntries(new FormData(message_form));
-    const isValid = isMessageValid(data);
-
+    const isValid = isMessageValid();
     setStatusBar(isValid, isValid ? "::BROADCAST-READY::" : "::INCOMPLETE-INPUT::");
 }
 
-function submitMessage(){
-    handleOnChangedMessage();
-    // check if form is valid (has username & a message)
-    let data = undefined
-    try{
-        const form = new FormData(message_form)
-        data = Object.fromEntries(form)
+async function submitMessage(e){
+    e.preventDefault();
+    if(!isMessageValid()){
+        setStatusBar(false, "::INCOMPLETE-INPUT::");
+        return;
     }
-    catch(e){
-        return false;
+
+    try {
+        const response = await fetch(message_form.action, {
+            method: "POST",
+            body: new FormData(message_form),
+            credentials: "same-origin"
+        });
+
+        if (response.redirected) {
+            window.location.href = response.url;
+            return;
+        }
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+            window.location.reload();
+            return;
+        }
+
+        setStatusBar(false, data.error || "::BROADCAST-FAILED::");
+    } catch (err) {
+        console.log(err);
+        setStatusBar(false, "::NETWORK-ERROR::");
     }
-    console.log(data);
-    if(!isMessageValid(data)){
-        return false;
-    }
-    // update logged messages
-    message_input.value = "";
-    data.decor_string = createRandomDecorString(4)
-    roars.push(data)
-    currentUsername = data.name
-    updateDisplayedMessages()
-    return false;
 }
 
-if(message_form != null) message_form.addEventListener("input", handleOnChangedMessage);
+if(message_form != null) {
+    message_form.addEventListener("input", handleOnChangedMessage);
+    message_form.addEventListener("submit", submitMessage);
+}
 
-// handling dummy data for testing
-dummy_roars = [
-    {
-        name: "NullPointerEx",
-        message: "Building a custom CLI tool to parse ambient network chatter. If you see glitch artifacts in your terminal feed, that's just my indexer running.",
-        decor_string: createRandomDecorString(4)
-    },
-    {
-        name: "SyntaxError_X",
-        message: "Refactored 500 lines of spaghetti code into a clean, recursive micro-service. No memory leaks detected. The system finally breathes.",
-        decor_string: createRandomDecorString(4)
-    },
-    {
-        name: "RootAccessOnly",
-        message: "Overclocked my local workstation kernel to push real-time neural network rendering. The heat sinks are glowing green, but the frame rate is unmatched.",
-        decor_string: createRandomDecorString(4)
-    },
-]
-
-roars = roars.concat(dummy_roars)
-updateDisplayedMessages()
-
-
-
-
-
+decorateMessages();
