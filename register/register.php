@@ -31,9 +31,6 @@ function isRegistrationFormValid($username, $pwd_original, $pwd_copy, $pdo){
 	$username = trim($_POST['name'] ?? '');
 	$pwd_original = $_POST['pwd_original'] ?? '';
 	$pwd_copy = $_POST['pwd_confirm'] ?? '';
-	error_log($username);
-	error_log($pwd_original);
-	error_log($pwd_copy);
 	$error = isRegistrationFormValid($username, $pwd_original, $pwd_copy, $pdo);
 	if ($error != '') {
 		error_log($error);
