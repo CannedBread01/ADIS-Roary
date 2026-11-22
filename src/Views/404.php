@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <?php require 'components/header.php'; ?>
+        <?php require 'Components/header.php'; ?>
 
         <div class="main-content">
             <div class="centered">
@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <?php require 'components/footer.php'; ?>
+        <?php require 'Components/footer.php'; ?>
     </div>
     <script src="src/utils.js"></script>
 </body>
