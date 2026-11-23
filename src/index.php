@@ -1,4 +1,21 @@
 <?php
+
+// Security configuration
+ini_set('session.use_strict_mode', '1');
+ini_set('session.use_only_cookies', '1');
+ini_set('session.use_trans_sid', '0');
+
+// Configure the session cookie
+session_name('app_session');
+
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path' => '/',
+    'secure' => true,
+    'httponly' => true,
+    'samesite' => 'Lax'
+]);
+
 session_start();
 
 $request = ['path' => parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), 'method' => $_SERVER['REQUEST_METHOD']];

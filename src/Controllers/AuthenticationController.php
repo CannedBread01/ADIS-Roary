@@ -11,9 +11,10 @@ class AuthenticationController {
         try{
             User::createUser($username, $password, $password_repeat);
             // successful login
+            session_regenerate_id(true);
             $_SESSION['username'] = $username;
             http_response_code(200);
-            echo json_encode(['success' => true, 'redirect' => '../index.php']);
+            echo json_encode(['success' => true, 'redirect' => '/homepage']);
         }
         catch(Exception $e){
             switch($e->getCode()){
@@ -52,9 +53,10 @@ class AuthenticationController {
         try{
             User::loginUser($username, $password);
             // successful login
+            session_regenerate_id(true);
             $_SESSION['username'] = $username;
             http_response_code(200);
-            echo json_encode(['success' => true, 'redirect' => '/']);
+            echo json_encode(['success' => true, 'redirect' => '/homepage']);
         }
         catch(Exception $e){
             // Handle the exception
@@ -79,13 +81,25 @@ class AuthenticationController {
         $_SESSION = [];
 
         if (ini_get('session.use_cookies')) {
-            $p = session_get_cookie_params();
-            setcookie(session_name(), '', time() - 42000,
-                $p['path'], $p['domain'], $p['secure'], $p['httponly']);
+            $params = session_get_cookie_params();
+
+            setcookie(
+                session_name(),
+                '',
+                [
+                    'expires' => time() - 42000,
+                    'path' => $params['path'],
+                    'domain' => $params['domain'],
+                    'secure' => $params['secure'],
+                    'httponly' => $params['httponly'],
+                    'samesite' => $params['samesite'] ?? 'Lax'
+                ]
+            );
         }
 
         session_destroy();
         header('Location: /');
+        exit;
     }
 
     public static function displayLoginPage(){
